@@ -33,3 +33,4 @@ while True:
         x_new = x.copy()
 
 print(x)
+#3.9999883  2.99998176
