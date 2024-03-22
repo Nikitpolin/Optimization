@@ -42,4 +42,4 @@ while True:
 
 print("Optimal x:", x[0])
 print("Optimal y:", x[1])
-#
+#[3.9999883  2.99998176]
