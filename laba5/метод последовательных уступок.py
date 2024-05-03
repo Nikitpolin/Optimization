@@ -1,42 +1,44 @@
-def f1(x1, x2):
-    return a1 * (x1 - b1)**2 + c1 * (x2 - d1)**2
+import numpy as np
 
-def f2(x1, x2):
-    return a2 * (x1 - b2)**2 + c2 * (x2 - d2)**2
+# Задание функций критериев fi(x)
+def f1(x):
+    return a1 * (x[0] - b1)**2 + c1 * (x[1] - d1)**2
 
-def f3(x1, x2):
-    return a3 * (x1 - b3)**2 + c3 * (x2 - d3)**2
+def f2(x):
+    return a2 * (x[0] - b2)**2 + c2 * (x[1] - d2)**2
+
+def f3(x):
+    return a3 * (x[0] - b3)**2 + c3 * (x[1] - d3)**2
 
 # Задание параметров функций
 a1, b1, c1, d1 = 1, 2, 3, 4
 a2, b2, c2, d2 = 2, -3, 4, -1
 a3, b3, c3, d3 = 3, 4, 5, -3
 
-def Successive_Concessions_Method(x1_range, x2_range):
+# Реализация метода последовательных уступок
+def successive_concessions(x):
+    f_values = [f1(x), f2(x), f3(x)]
+    min_index = np.argmin(f_values)
+    return min_index + 1
+
+# Поиск оптимальной точки
+def find_optimal_point():
+    # Инициализация оптимальной точки и минимального индекса
     optimal_point = None
-    min_f_val = float('inf')
+    min_index = np.inf
     
-    for x1 in x1_range:
-        for x2 in x2_range:
-            f1_val = f1(x1, x2)
-            f2_val = f2(x1, x2)
-            f3_val = f3(x1, x2)
-            
-            min_val = min(f1_val, f2_val, f3_val)
-            
-            if min_val < min_f_val:
-                min_f_val = min_val
-                optimal_point = (x1, x2, min_val)
+    # Перебор всех возможных точек
+    for x1 in np.linspace(0, 10, num=100):
+        for x2 in np.linspace(0, 10, num=100):
+            # Вычисление индекса минимальной функции
+            index = successive_concessions((x1, x2))
+            # Поиск минимального индекса
+            if index < min_index:
+                min_index = index
+                optimal_point = (x1, x2)
     
-    return optimal_point
+    return optimal_point if optimal_point is not None else "No optimal point found"
 
-# Задание диапазонов переменных x1 и x2
-x1_range = range(-10, 11)
-x2_range = range(-10, 11)
-
-# Поиск оптимальной точки методом последовательных уступок
-optimal_point = Successive_Concessions_Method(x1_range, x2_range)
-
-# Вывод результата
-print("Оптимальная точка методом последовательных уступок:")
-print("Точка:", optimal_point[:2], "Значение функции:", optimal_point[2])
+# Вызов функции поиска оптимальной точки
+optimal_point = find_optimal_point()
+print("Оптимальная точка по методу последовательных уступок:", optimal_point)
