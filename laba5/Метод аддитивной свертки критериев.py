@@ -2,34 +2,33 @@ import numpy as np
 
 # Задание функций критериев fi(x)
 def f1(x):
-    return a1 * (x[0] - b1)**2 + c1 * (x[1] - d1)**2
+    return (x[0] - 2)**2 + 3 * (x[1] - 4)**2
 
 def f2(x):
-    return a2 * (x[0] - b2)**2 + c2 * (x[1] - d2)**2
+    return 2 * (x[0] + 3)**2 + 4 * (x[1] + 1)**2
 
 def f3(x):
-    return a3 * (x[0] - b3)**2 + c3 * (x[1] - d3)**2
+    return 3 * (x[0] + 4)**2 + 5 * (x[1] - 3)**2
 
 # Задание параметров функций
-a1, b1, c1, d1 = 1, 2, 3, 4
-a2, b2, c2, d2 = 2, -3, 4, -1
-a3, b3, c3, d3 = 3, 4, 5, -3
-# Реализация метода аддитивной свертки
+a1, a2, a3 = 0.4, 0.3, 0.3
+
+# Реализация метода аддитивной свертки с весами
 def additive_convolution(x):
     return a1 * f1(x) + a2 * f2(x) + a3 * f3(x)
 
 # Поиск оптимальной точки
 def find_optimal_point():
-    # Инициализация оптимальной точки и минимальной суммы критериев
+    # Инициализация оптимальной точки и минимального значения свертки
     optimal_point = None
     min_convolution = np.inf
     
     # Перебор всех возможных точек
     for x1 in np.linspace(0, 10, num=100):
         for x2 in np.linspace(0, 10, num=100):
-            # Расчет суммы критериев
+            # Расчет обобщенной свертки для текущей точки
             convolution = additive_convolution((x1, x2))
-            # Поиск минимума
+            # Поиск минимального значения свертки
             if convolution < min_convolution:
                 min_convolution = convolution
                 optimal_point = (x1, x2)
@@ -38,5 +37,4 @@ def find_optimal_point():
 
 # Вызов функции поиска оптимальной точки
 optimal_point = find_optimal_point()
-print("Оптимальная точка по методу аддитивной свертки:", optimal_point)
-#Оптимальная точка по методу аддитивной свертки: (1.8181818181818181, 0.0)
+print("Оптимальная точка по методу аддитивной свертки с весами:", optimal_point)
