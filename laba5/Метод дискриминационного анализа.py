@@ -2,20 +2,22 @@ import numpy as np
 
 # Задание функций критериев fi(x)
 def f1(x):
-    return (x[0] - 2)**2 + 3 * (x[1] - 4)**2
+    return a1 * (x[0] - b1)**2 + c1 * (x[1] - d1)**2
 
 def f2(x):
-    return 2 * (x[0] + 3)**2 + 4 * (x[1] + 1)**2
+    return a2 * (x[0] - b2)**2 + c2 * (x[1] - d2)**2
 
 def f3(x):
-    return 3 * (x[0] + 4)**2 + 5 * (x[1] - 3)**2
+    return a3 * (x[0] - b3)**2 + c3 * (x[1] - d3)**2
 
 # Задание параметров функций
-a1, a2, a3 = 0.4, 0.3, 0.3
+a1, b1, c1, d1 = 0.4, 2, 3, 4
+a2, b2, c2, d2 = 0.3, -3, 4, -1
+a3, b3, c3, d3 = 0.3, 4, 5, -3
 
-# Реализация метода дискриминационного анализа с весами
+# Реализация метода дискриминационного анализа
 def discrimination_analysis(x):
-    f_values = [a1 * f1(x), a2 * f2(x), a3 * f3(x)]
+    f_values = [f1(x), f2(x), f3(x)]
     min_index = np.argmin(f_values)
     return min_index + 1
 
@@ -40,3 +42,4 @@ def find_optimal_point():
 # Вызов функции поиска оптимальной точки
 optimal_point = find_optimal_point()
 print("Оптимальная точка по методу дискриминационного анализа:", optimal_point)
+
