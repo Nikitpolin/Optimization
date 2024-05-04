@@ -39,4 +39,4 @@ def find_optimal_point():
 
 # Вызов функции поиска оптимальной точки
 optimal_point = find_optimal_point()
-print("Оптимальная точка по методу дискриминационного анализа с весами:", optimal_point)
+print("Оптимальная точка по методу дискриминационного анализа:", optimal_point)
